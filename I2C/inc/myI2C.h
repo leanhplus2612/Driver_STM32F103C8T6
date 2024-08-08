@@ -95,6 +95,20 @@ typedef struct{
 	RCC_RegDef_t * I2Cx;
 }I2C_Handle_t;
 
+
+
+/*
+ *	Bit Register Position
+ */
+
+#define I2C_CR1_PE			0U
+#define I2C_CR1_ACK			10U
+#define I2C_CR2_FREQ		0U
+#define I2C_CR2_ADD			1U
+#define I2C_CCR_FS			15U
+#define I2C_CCR_DUTY		14U
+#define I2C_CCR_CCR			0U
+
 /*
  * function prototype
  */
@@ -103,15 +117,13 @@ typedef struct{
 /*
  * Peripheral Clock setup
  */
-
-void I2C_PeriClockControl(I2C_RegDef_t *pI2Cx, uint8_t EnorDi);
+void I2C_PeriClockControl(I2C_Regdef_t *pI2Cx, uint8_t EnorDi);
 
 /*
  * Init and De - init
  */
-
-void SPI_Init(I2C_RegDef_t *pI2Cx, I2C_Config_t *pI2CConfig);
-void SPI_DeInit(I2C_RegDef_t *pI2Cx);
+void I2C_Init(I2C_Regdef_t *pI2Cx, I2C_Config_t *pI2CConfig);
+void I2C_DeInit(I2C_Regdef_t *pI2Cx);
 
 /*
  * Data Send and Receive
@@ -124,5 +136,10 @@ void SPI_DeInit(I2C_RegDef_t *pI2Cx);
 void I2C_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
 void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
 
-
+/*
+ * Other Peripheral Control APIs
+ */
+void I2C_PeripheralControl(I2C_Regdef_t *pI2Cx, uint8_t EnOrDi);
+uint8_t I2C_GetFlagStatus(I2C_Regdef_t *pI2Cx, uint32_t FlagName);
+uint32_t RCC_GetPCLK1Value(void);
 #endif /* INC_MYI2C_H_ */
